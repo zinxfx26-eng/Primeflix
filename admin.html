@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Prime Flix Admin</title>
+
+<link rel="stylesheet" href="admin.css">
+
+</head>
+
+
+<body>
+
+
+<div class="login-box">
+
+<h1>Prime Flix Admin</h1>
+
+
+<input 
+id="email"
+placeholder="Admin Email"
+type="email">
+
+
+<input 
+id="password"
+placeholder="Password"
+type="password">
+
+
+
+<button onclick="login()">
+Login
+</button>
+
+
+<p id="message"></p>
+
+
+</div>
+
+
+
+
+
+<div id="dashboard" class="hidden">
+
+
+<h1>Admin Dashboard</h1>
+
+
+<h2>Add Content</h2>
+
+
+
+<input id="title"
+placeholder="Movie / Series Name">
+
+
+<input id="image"
+placeholder="Poster Image URL">
+
+
+
+<textarea 
+id="description"
+placeholder="Description">
+</textarea>
+
+
+
+<select id="category">
+
+<option>
+Movie
+</option>
+
+<option>
+Series
+</option>
+
+<option>
+News
+</option>
+
+</select>
+
+
+
+<button onclick="addContent()">
+Add
+</button>
+
+
+
+<h2>Your Content</h2>
+
+
+<div id="contentList"></div>
+
+
+
+</div>
+
+
+
+<script src="admin.js"></script>
+
+
+</body>
+
+</html>
