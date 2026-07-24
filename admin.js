@@ -1,7 +1,5 @@
-// Load movies from Local Storage
 let movies = JSON.parse(localStorage.getItem("movies")) || [];
 
-// Add Movie
 document.getElementById("addMovie").addEventListener("click", () => {
 
     const title = document.getElementById("movieTitle").value.trim();
@@ -12,20 +10,25 @@ document.getElementById("addMovie").addEventListener("click", () => {
     const year = document.getElementById("year").value.trim();
     const rating = document.getElementById("rating").value.trim();
 
-    if (
-        !title ||
-        !poster ||
-        !movie ||
-        !description ||
-        !category ||
-        !year ||
-        !rating
-    ) {
-        alert("Please fill all fields.");
-        return;
-    }
+    console.log({
+        title,
+        poster,
+        movie,
+        description,
+        category,
+        year,
+        rating
+    });
 
-    const newMovie = {
+    if (!title) return alert("Movie Title is empty");
+    if (!poster) return alert("Poster URL is empty");
+    if (!movie) return alert("Movie URL is empty");
+    if (!description) return alert("Description is empty");
+    if (!category) return alert("Category is empty");
+    if (!year) return alert("Year is empty");
+    if (!rating) return alert("Rating is empty");
+
+    movies.push({
         id: Date.now(),
         title,
         poster,
@@ -34,20 +37,9 @@ document.getElementById("addMovie").addEventListener("click", () => {
         category,
         year,
         rating
-    };
-
-    movies.push(newMovie);
+    });
 
     localStorage.setItem("movies", JSON.stringify(movies));
 
     alert("✅ Movie Added Successfully!");
-
-    // Clear form
-    document.getElementById("movieTitle").value = "";
-    document.getElementById("posterUrl").value = "";
-    document.getElementById("movieUrl").value = "";
-    document.getElementById("description").value = "";
-    document.getElementById("category").value = "";
-    document.getElementById("year").value = "";
-    document.getElementById("rating").value = "";
 });
