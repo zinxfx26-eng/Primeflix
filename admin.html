@@ -11,17 +11,23 @@
 <h1>🎬 PrimeFlix Admin Panel</h1>
 
 <div class="container">
+<h2>🎬 Add Movie</h2>
 
-    <h2>Add Movie</h2>
+<input type="text" id="movieTitle" placeholder="Movie Title">
 
-    <input type="text" id="movieTitle" placeholder="Movie Title">
+<input type="text" id="posterUrl" placeholder="Poster Image URL (Google Drive)">
 
-    <input type="text" id="moviePoster" placeholder="Poster Image URL">
+<input type="text" id="movieUrl" placeholder="Movie URL (Google Drive)">
 
-    <textarea id="movieDesc" placeholder="Movie Description"></textarea>
+<textarea id="description" placeholder="Movie Description"></textarea>
 
-    <button id="addMovie">Add Movie</button>
+<input type="text" id="category" placeholder="Category (Action, Horror, Comedy...)">
 
+<input type="number" id="year" placeholder="Release Year">
+
+<input type="number" step="0.1" id="rating" placeholder="IMDb Rating">
+
+<button id="addMovie">➕ Add Movie</button>
     <hr>
 
     <h2>Add News</h2>
