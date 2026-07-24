@@ -2,179 +2,107 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Prime Flix</title>
-
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Flix</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 
 <body>
 
-<header>
+    <header>
+        <h1>🎬 Prime Flix</h1>
 
-<h1>🎬 Prime Flix</h1>
+        <nav>
+            <a href="#movies">Movies</a>
+            <a href="#series">Series</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
 
-<nav>
-<a href="#movies">Movies</a>
-<a href="#series">Series</a>
-<a href="#news">News</a>
-<a href="#contact">Contact</a>
-</nav>
+    <section class="hero">
 
-</header>
+        <h2>Unlimited Entertainment</h2>
 
+        <p>
+            Watch movies, series and get the latest updates on Prime Flix.
+        </p>
 
+        <button>Start Watching</button>
 
-<section class="hero">
+    </section>
 
-<h2>Unlimited Entertainment</h2>
+    <!-- Movies -->
+    <section id="movies">
 
-<p>
-Watch movies, series and get the latest updates on Prime Flix.
-</p>
+        <h2>🔥 Latest Movies</h2>
 
-<button>
-Start Watching
-</button>
+        <!-- Movies will be added automatically -->
+        <div class="cards" id="movieContainer">
 
-</section>
+        </div>
 
+    </section>
 
+    <!-- Web Series -->
+    <section id="series">
 
-<section id="movies">
+        <h2>📺 Web Series</h2>
 
-<h2>🔥 Latest Movies</h2>
+        <div class="cards">
 
-<div class="cards">
+            <div class="card">
+                <img src="https://picsum.photos/300/450" alt="Series">
+                <h3>Coming Soon</h3>
+                <p>Web series will be available soon.</p>
+            </div>
 
+        </div>
 
-<div class="card">
+    </section>
 
-<img src="https://via.placeholder.com/300x450">
+    <!-- News -->
+    <section id="news">
 
-<h3>Movie Name</h3>
+        <h2>📰 Latest News</h2>
 
-<p>
-Movie description goes here.
-</p>
+        <div class="news-box">
 
-</div>
+            <h3>Welcome to Prime Flix</h3>
 
+            <p>
+                Latest entertainment news will appear here.
+            </p>
 
+        </div>
 
-<div class="card">
+    </section>
 
-<img src="https://via.placeholder.com/300x450">
+    <!-- Contact -->
+    <section id="contact">
 
-<h3>Another Movie</h3>
+        <h2>📩 Contact</h2>
 
-<p>
-Add more movies later.
-</p>
+        <p>
+            Email:
+            <a href="mailto:primeflix26@gmail.com">
+                primeflix26@gmail.com
+            </a>
+        </p>
 
-</div>
+    </section>
 
+    <footer>
 
-</div>
+        <p>
+            © 2026 Prime Flix. All rights reserved.
+        </p>
 
-</section>
+    </footer>
 
-
-
-
-<section id="series">
-
-<h2>📺 Web Series</h2>
-
-
-<div class="cards">
-
-
-<div class="card">
-
-<img src="https://via.placeholder.com/300x450">
-
-<h3>Series Name</h3>
-
-<p>
-Series description.
-</p>
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-<section id="news">
-
-
-<h2>📰 Latest News</h2>
-
-
-<div class="news-box">
-
-<h3>
-Welcome to Prime Flix
-</h3>
-
-
-<p>
-Movies, series and entertainment updates will appear here.
-</p>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section id="contact">
-
-
-<h2>📩 Contact</h2>
-
-
-<p>
-Email:
-<a href="mailto:primeflix26@gmail.com">
-primeflix26@gmail.com
-</a>
-</p>
-
-
-</section>
-
-
-
-
-
-<footer>
-    <p>© 2026 Prime Flix. All rights reserved.</p>
-</footer>
-
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- Your Supabase configuration -->
-<script src="supabase.js"></script>
-
-<!-- Your website JavaScript -->
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
