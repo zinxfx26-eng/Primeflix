@@ -1,52 +1,63 @@
 console.log("Prime Flix Loaded Successfully!");
 
-// Welcome button
-document.querySelector(".hero button").addEventListener("click", function () {
+// Welcome Button
+document.querySelector(".hero button").addEventListener("click", () => {
     alert("🎬 Welcome to Prime Flix!");
 });
 
+// Get Movies
+let movies = JSON.parse(localStorage.getItem("movies")) || [];
+
 // Load Movies
-function loadMovies() {
+function loadMovies(search = "") {
 
     const movieContainer = document.getElementById("movieContainer");
 
     if (!movieContainer) return;
 
-    const movies = JSON.parse(localStorage.getItem("movies")) || [];
-
     movieContainer.innerHTML = "";
 
-    if (movies.length === 0) {
+    const filteredMovies = movies.filter(movie =>
+        movie.title.toLowerCase().includes(search.toLowerCase()) ||
+        movie.category.toLowerCase().includes(search.toLowerCase()) ||
+        movie.description.toLowerCase().includes(search.toLowerCase())
+    );
+
+    if (filteredMovies.length === 0) {
+
         movieContainer.innerHTML = `
-            <p style="color:white;font-size:20px;">
-                No movies available.
-            </p>
+            <h2 style="color:white;text-align:center;width:100%;">
+                No Movies Found 😢
+            </h2>
         `;
+
         return;
     }
 
-    movies.forEach(movie => {
+    filteredMovies.forEach(movie => {
 
         movieContainer.innerHTML += `
-            <div class="card">
 
-                <img src="${movie.poster}" alt="${movie.title}">
+        <div class="card">
 
-                <h3>${movie.title}</h3>
+            <img src="${movie.poster}" alt="${movie.title}">
 
-                <p>${movie.description}</p>
+            <h3>${movie.title}</h3>
 
-                <p><strong>Category:</strong> ${movie.category}</p>
+            <p>${movie.description}</p>
 
-                <p><strong>Year:</strong> ${movie.year}</p>
+            <p><strong>🎭 Category:</strong> ${movie.category}</p>
 
-                <p><strong>⭐ Rating:</strong> ${movie.rating}</p>
+            <p><strong>📅 Year:</strong> ${movie.year}</p>
 
-                <a href="${movie.movie}" target="_blank">
-                    <button>▶ Watch Now</button>
-                </a>
+            <p><strong>⭐ Rating:</strong> ${movie.rating}</p>
 
-            </div>
+            <a href="${movie.movie}" target="_blank">
+                <button>▶ Watch Now</button>
+            </a>
+
+        </div>
+
         `;
 
     });
@@ -69,16 +80,34 @@ function loadNews() {
     news.forEach(item => {
 
         newsContainer.innerHTML += `
-            <div class="news-box">
-                <h3>${item.title}</h3>
-                <p>${item.content}</p>
-            </div>
+
+        <div class="news-box">
+
+            <h3>${item.title}</h3>
+
+            <p>${item.content}</p>
+
+        </div>
+
         `;
 
     });
 
 }
 
-// Run everything
+// Search
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+
+    searchInput.addEventListener("input", function () {
+
+        loadMovies(this.value);
+
+    });
+
+}
+
+// Start
 loadMovies();
 loadNews();
