@@ -16,3 +16,17 @@ document.querySelector(".hero button")
 alert("Welcome to Prime Flix!");
 
 };
+async function testConnection() {
+  const { data, error } = await supabase
+    .from("movies")
+    .select("*");
+
+  if (error) {
+    console.error("Error:", error);
+  } else {
+    console.log("Connected to Supabase!");
+    console.log(data);
+  }
+}
+
+testConnection();
