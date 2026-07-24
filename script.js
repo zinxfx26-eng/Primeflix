@@ -30,3 +30,17 @@ async function testConnection() {
 }
 
 testConnection();
+async function loadMovies() {
+  const { data, error } = await supabase
+    .from("movies")
+    .select("*");
+
+  if (error) {
+    console.error("Supabase Error:", error);
+    return;
+  }
+
+  console.log("Movies:", data);
+}
+
+loadMovies();
