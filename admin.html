@@ -1,114 +1,40 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
-<title>Prime Flix Admin</title>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimeFlix Admin</title>
 <link rel="stylesheet" href="admin.css">
-
 </head>
-
-
 <body>
 
+<h1>🎬 PrimeFlix Admin Panel</h1>
 
-<div class="login-box">
+<div class="container">
 
-<h1>Prime Flix Admin</h1>
+    <h2>Add Movie</h2>
 
+    <input type="text" id="movieTitle" placeholder="Movie Title">
 
-<input 
-id="email"
-placeholder="Admin Email"
-type="email">
+    <input type="text" id="moviePoster" placeholder="Poster Image URL">
 
+    <textarea id="movieDesc" placeholder="Movie Description"></textarea>
 
-<input 
-id="password"
-placeholder="Password"
-type="password">
+    <button id="addMovie">Add Movie</button>
 
+    <hr>
 
+    <h2>Add News</h2>
 
-<button onclick="login()">
-Login
-</button>
+    <input type="text" id="newsTitle" placeholder="News Title">
 
+    <textarea id="newsContent" placeholder="News Content"></textarea>
 
-<p id="message"></p>
-
+    <button id="addNews">Add News</button>
 
 </div>
-
-
-
-
-
-<div id="dashboard" class="hidden">
-
-
-<h1>Admin Dashboard</h1>
-
-
-<h2>Add Content</h2>
-
-
-
-<input id="title"
-placeholder="Movie / Series Name">
-
-
-<input id="image"
-placeholder="Poster Image URL">
-
-
-
-<textarea 
-id="description"
-placeholder="Description">
-</textarea>
-
-
-
-<select id="category">
-
-<option>
-Movie
-</option>
-
-<option>
-Series
-</option>
-
-<option>
-News
-</option>
-
-</select>
-
-
-
-<button onclick="addContent()">
-Add
-</button>
-
-
-
-<h2>Your Content</h2>
-
-
-<div id="contentList"></div>
-
-
-
-</div>
-
-
 
 <script src="admin.js"></script>
 
-
 </body>
-
 </html>
