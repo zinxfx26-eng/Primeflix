@@ -43,3 +43,50 @@ document.getElementById("addMovie").addEventListener("click", () => {
 
     alert("✅ Movie Added Successfully!");
 });
+function showMovies() {
+
+    const movieList = document.getElementById("movieList");
+    const movies = JSON.parse(localStorage.getItem("movies")) || [];
+
+    movieList.innerHTML = "";
+
+    if (movies.length === 0) {
+        movieList.innerHTML = "<p>No movies found.</p>";
+        return;
+    }
+
+    movies.forEach((movie, index) => {
+
+        movieList.innerHTML += `
+            <div style="background:#222;padding:15px;margin:10px 0;border-radius:10px;">
+                <h3>${movie.title}</h3>
+
+                <button onclick="deleteMovie(${index})">
+                    🗑 Delete
+                </button>
+            </div>
+        `;
+
+    });
+
+}
+
+function deleteMovie(index) {
+
+    let movies = JSON.parse(localStorage.getItem("movies")) || [];
+
+    if(confirm("Delete this movie?")){
+
+        movies.splice(index,1);
+
+        localStorage.setItem("movies", JSON.stringify(movies));
+
+        showMovies();
+
+        alert("Movie Deleted!");
+
+    }
+
+}
+
+showMovies();
