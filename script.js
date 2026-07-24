@@ -1,46 +1,36 @@
 console.log("Prime Flix loaded successfully");
 
+// Hero Button
+const heroButton = document.querySelector(".hero button");
 
-// Future features:
-// - Supabase login
-// - Admin dashboard
-// - Upload movies
-// - Add news
-// - Edit website sections
-
-
-
-document.querySelector(".hero button")
-.onclick=function(){
-
-alert("Welcome to Prime Flix!");
-
-};
-async function testConnection() {
-  const { data, error } = await supabase
-    .from("movies")
-    .select("*");
-
-  if (error) {
-    console.error("Error:", error);
-  } else {
-    console.log("Connected to Supabase!");
-    console.log(data);
-  }
+if (heroButton) {
+  heroButton.addEventListener("click", () => {
+    alert("Welcome to Prime Flix!");
+  });
 }
 
-testConnection();
+// =============================
+// Load Movies From Supabase
+// =============================
+
 async function loadMovies() {
-  const { data, error } = await supabase
-    .from("movies")
-    .select("*");
+  try {
+    const { data, error } = await supabase
+      .from("movies")
+      .select("*");
 
-  if (error) {
-    console.error("Supabase Error:", error);
-    return;
+    if (error) {
+      console.error("Supabase Error:", error);
+      return;
+    }
+
+    console.log("Connected to Supabase ✅");
+    console.log("Movies:", data);
+
+    // We'll display the movies on the page later.
+  } catch (err) {
+    console.error("Unexpected Error:", err);
   }
-
-  console.log("Movies:", data);
 }
 
 loadMovies();
