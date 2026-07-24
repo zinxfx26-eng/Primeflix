@@ -1,40 +1,57 @@
-console.log("Prime Flix Loaded Successfully!");
+console.log("PrimeFlix Loaded!");
 
-// Welcome Button
 document.querySelector(".hero button").addEventListener("click", () => {
-    alert("🎬 Welcome to Prime Flix!");
+    alert("🎬 Welcome to PrimeFlix!");
 });
 
-// Get Movies
-let movies = JSON.parse(localStorage.getItem("movies")) || [];
+const movieContainer = document.getElementById("movieContainer");
+const newsContainer = document.getElementById("newsContainer");
+const searchInput = document.getElementById("searchInput");
 
-// Load Movies
-function loadMovies(search = "") {
+let allMovies = [];
 
-    const movieContainer = document.getElementById("movieContainer");
+// Load Movies From Supabase
+async function loadMovies(search = "") {
 
-    if (!movieContainer) return;
+    const { data, error } = await supabase
+        .from("movies")
+        .select("*")
+        .order("id", { ascending: false });
+
+    if (error) {
+        console.error(error);
+        movieContainer.innerHTML = "<h2>Failed to load movies.</h2>";
+        return;
+    }
+
+    allMovies = data;
+
+    let movies = data;
+
+    if (search !== "") {
+
+        movies = movies.filter(movie =>
+            movie.title.toLowerCase().includes(search.toLowerCase()) ||
+            movie.category.toLowerCase().includes(search.toLowerCase()) ||
+            movie.description.toLowerCase().includes(search.toLowerCase())
+        );
+
+    }
 
     movieContainer.innerHTML = "";
 
-    const filteredMovies = movies.filter(movie =>
-        movie.title.toLowerCase().includes(search.toLowerCase()) ||
-        movie.category.toLowerCase().includes(search.toLowerCase()) ||
-        movie.description.toLowerCase().includes(search.toLowerCase())
-    );
-
-    if (filteredMovies.length === 0) {
+    if (movies.length === 0) {
 
         movieContainer.innerHTML = `
-            <h2 style="color:white;text-align:center;width:100%;">
-                No Movies Found 😢
-            </h2>
+        <h2 style="width:100%;text-align:center;">
+            No Movies Found
+        </h2>
         `;
 
         return;
     }
 
-    filteredMovies.forEach(movie => {
+    movies.forEach(movie => {
 
         movieContainer.innerHTML += `
 
@@ -46,14 +63,16 @@ function loadMovies(search = "") {
 
             <p>${movie.description}</p>
 
-            <p><strong>🎭 Category:</strong> ${movie.category}</p>
+            <p><strong>Category:</strong> ${movie.category}</p>
 
-            <p><strong>📅 Year:</strong> ${movie.year}</p>
+            <p><strong>Year:</strong> ${movie.year}</p>
 
             <p><strong>⭐ Rating:</strong> ${movie.rating}</p>
 
             <a href="${movie.movie}" target="_blank">
+
                 <button>▶ Watch Now</button>
+
             </a>
 
         </div>
@@ -64,50 +83,74 @@ function loadMovies(search = "") {
 
 }
 
-// Load News
-function loadNews() {
+// Search
+if (searchInput) {
 
-    const newsContainer = document.getElementById("newsContainer");
+    searchInput.addEventListener("input", () => {
+
+        const keyword = searchInput.value.toLowerCase();
+
+        const filtered = allMovies.filter(movie =>
+            movie.title.toLowerCase().includes(keyword) ||
+            movie.category.toLowerCase().includes(keyword) ||
+            movie.description.toLowerCase().includes(keyword)
+        );
+
+        movieContainer.innerHTML = "";
+
+        if (filtered.length === 0) {
+
+            movieContainer.innerHTML =
+                "<h2 style='width:100%;text-align:center;'>No Movies Found</h2>";
+
+            return;
+        }
+
+        filtered.forEach(movie => {
+
+            movieContainer.innerHTML += `
+
+            <div class="card">
+
+                <img src="${movie.poster}" alt="${movie.title}">
+
+                <h3>${movie.title}</h3>
+
+                <p>${movie.description}</p>
+
+                <p><strong>Category:</strong> ${movie.category}</p>
+
+                <p><strong>Year:</strong> ${movie.year}</p>
+
+                <p><strong>⭐ Rating:</strong> ${movie.rating}</p>
+
+                <a href="${movie.movie}" target="_blank">
+
+                    <button>▶ Watch Now</button>
+
+                </a>
+
+            </div>
+
+            `;
+
+        });
+
+    });
+
+}
+
+// News (optional for now)
+async function loadNews() {
 
     if (!newsContainer) return;
 
-    const news = JSON.parse(localStorage.getItem("news")) || [];
-
-    if (news.length === 0) return;
-
-    newsContainer.innerHTML = "";
-
-    news.forEach(item => {
-
-        newsContainer.innerHTML += `
-
-        <div class="news-box">
-
-            <h3>${item.title}</h3>
-
-            <p>${item.content}</p>
-
-        </div>
-
-        `;
-
-    });
+    newsContainer.innerHTML = `
+    <h3>PrimeFlix</h3>
+    <p>Latest News Coming Soon...</p>
+    `;
 
 }
 
-// Search
-const searchInput = document.getElementById("searchInput");
-
-if (searchInput) {
-
-    searchInput.addEventListener("input", function () {
-
-        loadMovies(this.value);
-
-    });
-
-}
-
-// Start
 loadMovies();
 loadNews();
