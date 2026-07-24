@@ -1,94 +1,54 @@
-let adminUser = "admin";
+// Load existing data
+let movies = JSON.parse(localStorage.getItem("movies")) || [];
+let news = JSON.parse(localStorage.getItem("news")) || [];
 
+// Add Movie
+document.getElementById("addMovie").addEventListener("click", () => {
+    const title = document.getElementById("movieTitle").value.trim();
+    const poster = document.getElementById("moviePoster").value.trim();
+    const description = document.getElementById("movieDesc").value.trim();
 
-function login(){
+    if (!title || !poster || !description) {
+        alert("Please fill in all movie fields.");
+        return;
+    }
 
+    movies.push({
+        id: Date.now(),
+        title,
+        poster,
+        description
+    });
 
-let email =
-document.getElementById("email").value;
+    localStorage.setItem("movies", JSON.stringify(movies));
 
+    alert("✅ Movie added successfully!");
 
-let password =
-document.getElementById("password").value;
+    document.getElementById("movieTitle").value = "";
+    document.getElementById("moviePoster").value = "";
+    document.getElementById("movieDesc").value = "";
+});
 
+// Add News
+document.getElementById("addNews").addEventListener("click", () => {
+    const title = document.getElementById("newsTitle").value.trim();
+    const content = document.getElementById("newsContent").value.trim();
 
+    if (!title || !content) {
+        alert("Please fill in all news fields.");
+        return;
+    }
 
-if(email && password){
+    news.push({
+        id: Date.now(),
+        title,
+        content
+    });
 
+    localStorage.setItem("news", JSON.stringify(news));
 
-document.querySelector(".login-box")
-.style.display="none";
+    alert("📰 News added successfully!");
 
-
-document.getElementById("dashboard")
-.classList.remove("hidden");
-
-
-}
-
-else{
-
-
-document.getElementById("message")
-.innerHTML="Enter login details";
-
-
-}
-
-
-}
-
-
-
-
-
-function addContent(){
-
-
-let title =
-document.getElementById("title").value;
-
-
-let image =
-document.getElementById("image").value;
-
-
-let description =
-document.getElementById("description").value;
-
-
-
-let category =
-document.getElementById("category").value;
-
-
-
-let box =
-document.createElement("div");
-
-
-box.className="card";
-
-
-
-box.innerHTML=`
-
-<h3>${title}</h3>
-
-<img width="150" src="${image}">
-
-<p>${description}</p>
-
-<b>${category}</b>
-
-`;
-
-
-
-document
-.getElementById("contentList")
-.appendChild(box);
-
-
-
-}
+    document.getElementById("newsTitle").value = "";
+    document.getElementById("newsContent").value = "";
+});
